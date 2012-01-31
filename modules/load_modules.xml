@@ -1,7 +1,0 @@
-﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">	
-	<Include file='skins\load_skins.xml'/>
-	<Include file='blizzard\load_blizzard.xml'/>
-	<Script file='rcd.lua'/>
-	<Script file='threatbar.lua'/>
-	<Script file='microbar.lua'/>
-</Ui>

@@ -1,5 +1,0 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">	
-	<Script file='atsw.lua'/>
-	<Script file='clique.lua'/>
-	<Script file='auctionator.lua'/>
-</Ui>
