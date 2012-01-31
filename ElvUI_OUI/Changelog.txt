@@ -1,6 +1,0 @@
-v1.0alpha
-	- add microbar (options in actionbar section)
-	- add whisper sounds (options in chat section)
-	- skin blizzard chat bubbles (options in Extra options)
-	- add extra data panel at top (not working yet)
-	- initial upload. alpha state. only a couple minor options exist currently
