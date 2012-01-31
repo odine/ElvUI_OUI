@@ -1,0 +1,21 @@
+## Interface: 40300
+## Title: Lib: ActionButton-1.0
+## Notes: Creates and manages secure Action Buttons
+## Author: Nevcairiel
+## X-eMail: h.leppkes@gmail.com
+## X-Category: Library
+## X-License: BSD
+## OptionalDeps: LibKeyBound-1.0
+## X-Curse-Packaged-Version: 0.12
+## X-Curse-Project-Name: LibActionButton-1.0
+## X-Curse-Project-ID: libactionbutton-1-0
+## X-Curse-Repository-ID: wow/libactionbutton-1-0/mainline
+## X-Curse-Packaged-Version: v3.19-18-g4443ef0
+## X-Curse-Project-Name: ElvUI
+## X-Curse-Project-ID: elvui
+## X-Curse-Repository-ID: wow/elvui/mainline
+
+LibStub\LibStub.lua
+CallbackHandler-1.0\CallbackHandler-1.0.lua
+
+LibActionButton-1.0.lua
