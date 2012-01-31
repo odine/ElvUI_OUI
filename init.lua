@@ -1,18 +1,15 @@
 local E, L, DF = unpack(ElvUI); --Engine
 local OUI = E:NewModule('OUI', 'AceEvent-3.0');
-local DT = E:GetModule('DataTexts');
-local M = E:GetModule('Misc');
 local LSM = LibStub("LibSharedMedia-3.0")
 
--- Create Extra DT Panel
-do
-	local top_bar = CreateFrame('Frame', 'TopDataPanel', E.UIParent)
-	top_bar:Width(430)
-	top_bar:Height(22)
-	top_bar:Point("TOP", E.UIParent, "TOP", 0, -4)
-	top_bar:SetTemplate("Default", true)
-	E:GetModule('DataTexts'):RegisterPanel(top_bar, 3, 'ANCHOR_BOTTOM', 0, -5)
-end
+StaticPopupDialogs["OUI_RL"] = {
+	text = L["Clicking ACCEPT will modify existing ElvUI settings! Are you sure you want to do this?"],
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function() OUI:CustomizeUI() end,
+	timeout = 0,
+	whileDead = 1,
+}
 
 
 function OUI:SetupExtraMedia()
@@ -23,14 +20,6 @@ function OUI:SetupExtraMedia()
 	E["media"].whisper = LSM:Fetch("sound", E.db["odine"].chat.whispersound)
 end
 
-function OUI:UpdateDTFont()
-	for panelName, panel in pairs(DT.RegisteredPanels) do
-		for i=1, panel.numPoints do
-			local pointIndex = DT.PointLocation[i]
-			panel.dataPanels[pointIndex].text:FontTemplate(LSM:Fetch("font", E.db.odine.dtFont), E.db.odine.dtFS, nil)
-		end
-	end
-end
 
 function OUI:MonitorWhispers(event)
 	if event == "CHAT_MSG_WHISPER" or "CHAT_MSG_BN_WHISPER" then
@@ -40,26 +29,74 @@ function OUI:MonitorWhispers(event)
 	end
 end
 
-local old = M.UpdateExpRepBarAnchor
-M.UpdateExpRepBarAnchor = function(...)
-	old(...)
-
-	if E.db.core.expRepPos == 'TOP_SCREEN' then
-		UpperRepExpBarHolder:ClearAllPoints()
-		UpperRepExpBarHolder:Point('TOP', E.UIParent, 'TOP', 0, -26)
-	end
-end
-
 
 function OUI:Initialize()
 	E:GetModule('Blizzard'):HandleBubbles()
 	E:GetModule('Blizzard'):RegisterEvent('START_TIMER')
 
 	self:SetupExtraMedia()
-	self:UpdateDTFont()
+	E:GetModule('DataTexts'):UpdateDTFont()
 	
 	self:RegisterEvent('CHAT_MSG_BN_WHISPER', 'MonitorWhispers')
 	self:RegisterEvent('CHAT_MSG_WHISPER', 'MonitorWhispers')
 end
+
+function OUI:CustomizeUI()
+	-- There simply has to be a better way
+	-- Forcing these changes everytime is not ideal in any way
+	-- TODO
+	-- Find a way to modify DEFAULTS so if user changes them it doesnt force back on next ReloadUI()
+
+
+	-- core
+	E.db.core.bordercolor = { r = .23,g = .23,b = .23 }
+	E.db.core.backdropcolor = { r = .07,g = .07,b = .07 }
+	
+	--NP
+	E.db.nameplate.showhealth = true
+	E.db.nameplate.trackauras = true
+	
+	--DT
+	E.db.datatexts.panels.spec1.LeftMiniPanel = 'System'
+	E.db.datatexts.panels.spec2.LeftMiniPanel = 'System'
+	E.db.datatexts.panels.spec1.RightMiniPanel = 'Time'
+	E.db.datatexts.panels.spec2.RightMiniPanel = 'Time'
+	E.db.datatexts.panels.spec1.RightChatDataPanel.left = 'Currency'
+	E.db.datatexts.panels.spec2.RightChatDataPanel.left = 'Currency'
+	E.db.datatexts.panels.spec1.RightChatDataPanel.middle = 'Gold'
+	E.db.datatexts.panels.spec2.RightChatDataPanel.middle = 'Gold'
+	E.db.datatexts.panels.spec1.RightChatDataPanel.right = 'Bags'
+	E.db.datatexts.panels.spec2.RightChatDataPanel.right = 'Bags'
+
+	--UF
+	E.db.unitframe.colors.health = { r = .1, g = .1, b = .1 }
+	E.db.unitframe.colors.health_backdrop = { r = 0.68, g = 0.25, b = 0.25 }
+	
+
+	ReloadUI()
+end
+
+
+--[[local myskin = CreateFrame("frame")
+myskin:RegisterEvent("PLAYER_ENTERING_WORLD")
+myskin:RegisterEvent("ADDON_LOADED")
+myskin:RegisterEvent("VARIABLES_LOADED")
+myskin:SetScript("OnEvent",function(self, event, addon)
+    if event == "PLAYER_ENTERING_WORLD" then
+			print("ENTERING WORLD")
+	end
+	if event == "ADDON_LOADED" then
+		if addon == "ElvUI_OUI" then
+			E:ImportDefaults()
+			print("ELVUI_OUI ADDON LOADED")
+		end
+		if addon == "ElvUI" then
+			print("ELVUI ADDON LOADED")
+		end
+	end
+	if event == "VARIABLES_LOADED" then
+			print("VAR LOADED")
+	end
+end)]]
 
 E:RegisterModule(OUI:GetName())

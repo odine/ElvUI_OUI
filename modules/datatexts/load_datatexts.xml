@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file='datatexts.lua'/>
+	<Script file='rdps.lua'/>
+	<Script file='rhps.lua'/>
+	<Script file='currency.lua'/>
+</Ui>

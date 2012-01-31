@@ -1,0 +1,9 @@
+v1.0-4
+- just change some stuff for curseforge nothing to see
+
+v1.0alpha3
+- added microbar (options in actionbar dropdowns)
+- added whisper sounds (options in chat)
+- raid cooldowns (options in extra options, more options to come)
+- Custom datatext font and font size (option in datatext area)
+- Extra datatext panel (also included a couple extra datatexts... currency, rdps, rhps)

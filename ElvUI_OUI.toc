@@ -1,6 +1,6 @@
 ﻿## Interface: 40300
 ## Author: Odine
-## Version: 1.0alpha3
+## Version: 1.0-4
 ## Title: |cffC495DDElvUI_OUI |r
 ## Notes: Modification of ElvUI V3
 ## RequiredDeps: ElvUI

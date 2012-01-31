@@ -1,0 +1,3 @@
+required-dependencies:
+    - ElvUI
+manual-changelog: CHANGELOG.txt

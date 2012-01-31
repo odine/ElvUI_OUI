@@ -24,16 +24,13 @@ DF["actionbar"].microbar = {
 }
 
 DF.datatexts.panels.spec1.TopDataPanel = {
-	left = 'Friends',
+	left = 'Guild',
 	middle = 'Spec Switch',
-	right = 'Guild',
+	right = 'Friends',
 }
 
 DF.datatexts.panels.spec2.TopDataPanel = {
-	left = 'Friends',
+	left = 'Guild',
 	middle = 'Spec Switch',
-	right = 'Guild',
+	right = 'Friends',
 }
-
-DF.datatexts.panels.spec1.LeftMiniPanel = 'System'
-DF.datatexts.panels.spec2.LeftMiniPanel = 'System'
