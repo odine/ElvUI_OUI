@@ -1,8 +1,18 @@
 local E, L, DF = unpack(ElvUI); --Engine
-local OUI = E:NewModule('OUI', 'AceEvent-3.0', 'AceTimer-3.0');
+local OUI = E:NewModule('OUI', 'AceEvent-3.0');
+local DT = E:GetModule('DataTexts');
 local M = E:GetModule('Misc');
-local DT = E:GetModule('DataTexts')
 local LSM = LibStub("LibSharedMedia-3.0")
+
+-- Create Extra DT Panel
+do
+	local top_bar = CreateFrame('Frame', 'TopDataPanel', E.UIParent)
+	top_bar:Width(430)
+	top_bar:Height(22)
+	top_bar:Point("TOP", E.UIParent, "TOP", 0, -4)
+	top_bar:SetTemplate("Default", true)
+	E:GetModule('DataTexts'):RegisterPanel(top_bar, 3, 'ANCHOR_BOTTOM', 0, -5)
+end
 
 
 function OUI:SetupExtraMedia()
@@ -30,15 +40,6 @@ function OUI:MonitorWhispers(event)
 	end
 end
 
-function OUI:CreateExtraPanels()
-	local bcPanel = CreateFrame("Frame", "TopDataPanel", E.UIParent)
-	bcPanel:Width(430)
-	bcPanel:Height(22)
-	bcPanel:Point("TOP", 0, -4)
-	bcPanel:SetTemplate("Default", true)
-	DT:RegisterPanel(bcPanel, 3, 'ANCHOR_TOP', 0, 5)
-end
-
 local old = M.UpdateExpRepBarAnchor
 M.UpdateExpRepBarAnchor = function(...)
 	old(...)
@@ -56,8 +57,6 @@ function OUI:Initialize()
 
 	self:SetupExtraMedia()
 	self:UpdateDTFont()
-	
-	self:CreateExtraPanels()
 	
 	self:RegisterEvent('CHAT_MSG_BN_WHISPER', 'MonitorWhispers')
 	self:RegisterEvent('CHAT_MSG_WHISPER', 'MonitorWhispers')

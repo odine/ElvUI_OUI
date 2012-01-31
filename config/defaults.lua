@@ -1,4 +1,5 @@
 ﻿local E, L, DF = unpack(ElvUI); --Engine
+ 
 
 DF["odine"] = {
 	["dtFont"] = "Odine Datatext",
@@ -22,13 +23,17 @@ DF["actionbar"].microbar = {
 	["mouseover"] = false,
 }
 
---DF.actionbar.microbar = {}
---DF.actionbar.microbar.enable = true
---DF.actionbar.microbar.mouseover = false
+DF.datatexts.panels.spec1.TopDataPanel = {
+	left = 'Friends',
+	middle = 'Spec Switch',
+	right = 'Guild',
+}
 
---E.db.datatexts.panels.spec1.TopDataPanel = {}
---E.db.datatexts.panels.spec1.TopDataPanel.middle = 'Spec Switch';
+DF.datatexts.panels.spec2.TopDataPanel = {
+	left = 'Friends',
+	middle = 'Spec Switch',
+	right = 'Guild',
+}
 
---DF.unitframe.OORAlpha = 0.55
---DF.unitframe.colors.health = { r = .1, g = .1, b = .1 }
---DF.unitframe.colors.health_backdrop = { r = 0.68, g = 0.25, b = 0.25 }
+DF.datatexts.panels.spec1.LeftMiniPanel = 'System'
+DF.datatexts.panels.spec2.LeftMiniPanel = 'System'
