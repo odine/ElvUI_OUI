@@ -2,8 +2,11 @@ local E, L, DF = unpack(ElvUI); --Engine
 local OUI = E:NewModule('OUI', 'AceEvent-3.0');
 local LSM = LibStub("LibSharedMedia-3.0")
 
+
 --variables
 E.OUI = GetAddOnMetadata("ElvUI_OUI", "Version"); 
+
+
 
 StaticPopupDialogs["OUI_INSTALL"] = {
 	text = L["Welcome to OUI.\n\nIn order to ensure proper installation of this module some of your settings may need to be modified.\n\nPlease click ACCEPT to continue."],
@@ -36,6 +39,79 @@ function OUI:MonitorWhispers(event)
 end
 
 
+function OUI:AutoRelease()
+	if E.db.odine.pvpautorelease ~= true then return end
+
+	local soulstone = GetSpellInfo(20707)
+	if ((E.myclass ~= "SHAMAN") and not (soulstone and UnitBuff("player", soulstone))) and MiniMapBattlefieldFrame.status == "active" then
+		RepopMe()
+	end
+end
+
+
+function OUI:AutoGreedLoot()
+	if E.db.odine.autogreed ~= true then return end
+
+	local name = select(2, GetLootRollItemInfo(id))
+	
+	--Auto Need Chaos Orb
+	if (name == select(1, GetItemInfo(52078))) then
+		RollOnLoot(id, 1)
+	end
+	
+	if E.level ~= MAX_PLAYER_LEVEL then return end
+	if (id and select(4, GetLootRollItemInfo(id))==2 and not (select(5, GetLootRollItemInfo(id)))) then
+		if RollOnLoot(id, 3) then
+			RollOnLoot(id, 3)
+		else
+			RollOnLoot(id, 2)
+		end
+	end
+end
+
+
+local hidestatic
+function OUI:AutoAcceptInv(event, ...)
+	if E.db.odine.autoacceptinv ~= true then return end
+
+	arg1 = ...
+	local leader = arg1
+	local ingroup = false
+	
+	if event == "PARTY_INVITE_REQUEST" then
+		if MiniMapLFGFrame:IsShown() then return end -- Prevent losing que inside LFD if someone invites you to group
+		if GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0 then return end
+		hidestatic = true
+	
+		-- Update Guild and Friendlist
+		if GetNumFriends() > 0 then ShowFriends() end
+		if IsInGuild() then GuildRoster() end
+		
+		for friendIndex = 1, GetNumFriends() do
+			local friendName = GetFriendInfo(friendIndex)
+			if friendName == leader then
+				AcceptGroup()
+				ingroup = true
+				break
+			end
+		end
+		
+		if not ingroup then
+			for guildIndex = 1, GetNumGuildMembers(true) do
+				local guildMemberName = GetGuildRosterInfo(guildIndex)
+				if guildMemberName == leader then
+					AcceptGroup()
+					break
+				end
+			end
+		end
+	elseif event == "PARTY_MEMBERS_CHANGED" and hidestatic == true then
+		StaticPopup_Hide("PARTY_INVITE")
+		hidestatic = false
+	end
+end
+
+
 function OUI:Initialize()
 	E:GetModule('Blizzard'):HandleBubbles()
 	E:GetModule('Blizzard'):RegisterEvent('START_TIMER')
@@ -48,7 +124,13 @@ function OUI:Initialize()
 
 	self:RegisterEvent('CHAT_MSG_BN_WHISPER', 'MonitorWhispers')
 	self:RegisterEvent('CHAT_MSG_WHISPER', 'MonitorWhispers')
+	self:RegisterEvent('PLAYER_DEAD', 'AutoRelease')
+	self:RegisterEvent('START_LOOT_ROLL', 'AutoGreedLoot')
+	
+	self:RegisterEvent('PARTY_INVITE_REQUEST', 'AutoAcceptInv')
+	self:RegisterEvent('PARTY_MEMBERS_CHANGED', 'AutoAcceptInv')
 end
+
 
 function OUI:SetupOUI()
 	-- Man i wish there was another way..... *sadface*

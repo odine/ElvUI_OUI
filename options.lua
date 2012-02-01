@@ -74,22 +74,52 @@ E.Options.args.actionbar.args.microbar = {
 
 E.Options.args.odine = {
 	type = "group",
-	name = L["Extra Options"],
-	childGroups = "select",
+	name = L["OUI"],
+	--childGroups = "select",
 	get = function(info) return E.db.odine[ info[#info] ] end,
 	set = function(info, value) E.db.odine[ info[#info] ] = value end,
 	args = {
 		intro = {
 			order = 1,
 			type = "description",
-			name = L["EXTRA_DESC"],
+			name = L["OUI_DESC"],
+		},
+		general = {
+			order = 2,
+			type = "group",
+			name = L["General"],
+			get = function(info) return E.db.odine[ info[#info] ] end,
+			set = function(info, value) E.db.odine[ info[#info] ] = value end,
+			guiInline = true,
+			args = {
+				pvpautorelease = {
+					type = "toggle",
+					order = 1,
+					name = L["PVP Autorelease"],
+					desc = L["Automatically release body when dead inside a bg"],
+					disabled = function() return E.myclass == "SHAMAN" end,
+				},
+				autoacceptinv = {
+					type = "toggle",
+					order = 2,
+					name = L["Auto Accept Invite"],
+					desc = L["Automatically accept invite when invited by a friend/guildie"],							
+				},
+				autogreed = {
+					type = "toggle",
+					order = 3,
+					name = L["Auto Greed/DE"],
+					desc = L["Automatically roll greed or Disenchant on green quality items"],								
+				},
+			},
 		},
 		rcd = {
-			order = 2,
+			order = 3,
 			type = "group",
 			name = L["Raid Cooldowns"],
 			get = function(info) return E.db.odine.rcd[ info[#info] ] end,
 			set = function(info, value) E.db.odine.rcd[ info[#info] ] = value end,
+			guiInline = true,
 			args = {
 				enable = {
 					order = 1,

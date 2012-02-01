@@ -1,3 +1,10 @@
+V1.0b
+- rename extra options to OUI
+- add auto accept invites (friends/guildmates)
+- add pvp auto release
+- add auto greed (untested careful for now)
+- skin blizz timers
+
 V1.0-5
 - add spark to raid cooldown bars
 - default was being changed instead of datatext font only. now fixed!

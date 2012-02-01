@@ -4,6 +4,9 @@
 DF["odine"] = {
 	["dtFont"] = "Odine Datatext",
 	["dtFS"] = 15,
+	["pvpautorelease"] = false,
+	["autoacceptinv"] = false,
+	["autogreed"] = false,
 	["chat"] = {
 		['bubbles'] = true,
 		['whisperwarning'] = true,

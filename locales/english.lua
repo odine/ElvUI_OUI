@@ -4,8 +4,14 @@ local L = LibStub("AceLocale-3.0"):GetLocale("ElvUI", false);
 if not L then return end
 
 -- General & Misc
-L["Extra Options"] = "Extra Options";
-L["EXTRA_DESC"] = "Additional functionality for ElvUI";
+L["OUI"] = "OUI";
+L["OUI_DESC"] = "Additional functionality for ElvUI";
+L["Auto Greed/DE"] = "Auto Greed/DE";
+L["Automatically roll greed or Disenchant on green quality items"] = "Automatically roll greed or Disenchant on green quality items";
+L["Auto Accept Invite"] = "Auto Accept Invite";
+L["Automatically accept invite when invited by a friend/guildie"] = "Automatically accept invite when invited by a friend/guildie";
+L["PVP Autorelease"] = "PVP Autorelease";
+L["Automatically release body when dead inside a bg"] = "Automatically release body when dead inside a bg";
 
 -- Datatext
 L["TopDataPanel"] = "Top Panel";
