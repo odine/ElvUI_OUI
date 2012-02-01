@@ -17,7 +17,7 @@ function DT:UpdateDTFont()
 	for panelName, panel in pairs(DT.RegisteredPanels) do
 		for i=1, panel.numPoints do
 			local pointIndex = DT.PointLocation[i]
-			panel.dataPanels[pointIndex].text:FontTemplate(LSM:Fetch("font", E.db.odine.dtFont), E.db.odine.dtFS, nil)
+			panel.dataPanels[pointIndex].text:FontTemplate(E["media"].dtFont, E.db.odine.dtFS, nil)
 		end
 	end
 end

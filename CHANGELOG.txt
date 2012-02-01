@@ -1,3 +1,9 @@
+V1.0-5
+- add spark to raid cooldown bars
+- default was being changed instead of datatext font only. now fixed!
+- related to above, but changing datatext font only worked after ui reload
+- add initial setup to customize look and feel slightly (changes default settings beware)
+
 v1.0-4
 - just change some stuff for curseforge nothing to see
 

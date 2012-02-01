@@ -81,6 +81,10 @@ local BarUpdate = function(self, elapsed)
 	self:SetValue(100 - (curTime - self.startTime) / (self.endTime - self.startTime) * 100)
 	self.right:SetText(R:FormatTime(self.endTime - curTime))
 	
+	local remaining = self.endTime - curTime;
+	local barpos = 100 - (curTime - self.startTime) / (self.endTime - self.startTime) * 100
+	self.spark:SetPoint("CENTER", self, "LEFT", barpos * 1.85, 0);
+	
 	--need to update colors incase changed in config
 	--prolly move this to a seperate update function and ONLY call when needed...
 	if E.db['odine']['rcd'].classcolor == true then
@@ -132,6 +136,13 @@ local CreateBar = function()
 	bar.icon.backdrop:Point("BOTTOMRIGHT", 2, -2)
 	bar.icon.backdrop:SetTemplate("Default")
 	bar.icon.backdrop:SetFrameStrata("BACKGROUND")
+	
+	local spark = bar:CreateTexture(nil, "OVERLAY", nil);
+	spark:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]]);
+	spark:SetWidth(12);
+	spark:SetBlendMode("ADD");
+	spark:Show();
+	bar.spark = spark;
 
 	return bar
 end
@@ -195,6 +206,7 @@ end
 SlashCmdList.RaidCD = function(msg)
 	StartTimer(UnitName("player"), 32182)	-- Heroism
 	StartTimer(UnitName("player"), 2825)	-- Bloodlust
+	StartTimer(UnitName("player"), 98008)
 end
 SLASH_RaidCD1 = "/rcd" -- testing purposes
 
