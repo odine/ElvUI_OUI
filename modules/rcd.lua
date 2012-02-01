@@ -88,8 +88,8 @@ local BarUpdate = function(self, elapsed)
 	--need to update colors incase changed in config
 	--prolly move this to a seperate update function and ONLY call when needed...
 	if E.db['odine']['rcd'].classcolor == true then
-		if self.cname then -- sloppy shit
-			local color = RAID_CLASS_COLORS[select(2, UnitClass(self.cname))]
+		local color = RAID_CLASS_COLORS[select(2, UnitClass(self.cname))]
+		if self.cname and color then
 			self:SetStatusBarColor(color.r, color.g, color.b)
 		else
 			elf:SetStatusBarColor(unpack(E["media"].backdropcolor))

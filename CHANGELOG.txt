@@ -4,6 +4,7 @@ V1.0b
 - add pvp auto release
 - add auto greed (untested careful for now)
 - skin blizz timers
+- adjust code in RCD should account for class color bug
 
 V1.0-5
 - add spark to raid cooldown bars
