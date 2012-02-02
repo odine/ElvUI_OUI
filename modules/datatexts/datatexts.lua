@@ -31,3 +31,23 @@ M.UpdateExpRepBarAnchor = function(...)
 		UpperRepExpBarHolder:Point('TOP', E.UIParent, 'TOP', 0, -26)
 	end
 end
+
+E.Options.args.datatexts.args.dtFontSize = {
+	order = 200,
+	name = L["Font Size"],
+	desc = L["Set the font size for Datatexts."],
+	type = "range",
+	min = 6, max = 25, step = 1,
+	set = function(info, value) E.db.odine.dtFS = value; OUI:SetupExtraMedia(); end,
+	get = function(info) return E.db.odine.dtFS end,
+}
+
+E.Options.args.datatexts.args.dtFont = {
+	type = "select", dialogControl = 'LSM30_Font',
+	order = 201,
+	name = L["Datatext Font"],
+	desc = L["The font that the datatexts will use."],
+	values = AceGUIWidgetLSMlists.font,	
+	set = function(info, value) E.db.odine.dtFont = value; OUI:SetupExtraMedia(); end,
+	get = function(info) return E.db.odine.dtFont end,
+}

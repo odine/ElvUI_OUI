@@ -1,6 +1,6 @@
 --
 -- W.I.P - RCD Module
--- initial code from Tukui forums via Duffed, updated to work for Elv v3 by odine
+-- initial code from RaidCD @ https://github.com/Allez/alRaidCD
 local E, L, DF = unpack(ElvUI)
 local R = E:NewModule('RCD', 'AceEvent-3.0');
 

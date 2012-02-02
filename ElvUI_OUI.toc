@@ -10,6 +10,7 @@ libs\load_libs.xml
 locales\load_locales.xml
 media\sharedmedia.lua
 config\defaults.lua
+config\reminder.lua
 init.lua
 modules\load_modules.xml
 options.lua

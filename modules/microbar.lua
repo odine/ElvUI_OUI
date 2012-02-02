@@ -168,3 +168,26 @@ AB.CreateActionBars = function(...)
 
 	AB:CreateMicroBar()
 end
+
+E.Options.args.actionbar.args.microbar = {
+	type = "group",
+	order = 600,
+	name = L["Micro Bar"],
+	childGroups = "select",
+	get = function(info) return E.db.actionbar.microbar[ info[#info] ] end,
+	set = function(info, value) E.db.actionbar.microbar[ info[#info] ] = value; E:GetModule('ActionBars'):UpdateMicroBar(); end,
+	args = {
+		enable = {
+			order = 1,
+			type = 'toggle',
+			name = L['Enable'],
+		},
+		mouseover = {
+			type = "toggle",
+			order = 11,
+			name = L['Mouse Over'],
+			desc = L['The frame is not shown unless you mouse over the frame.'],
+			disabled = function() return not E.db.actionbar.enable or not E.db.actionbar.microbar.enable end,
+		},
+	},
+}

@@ -5,4 +5,5 @@
 	<Script file='rcd.lua'/>
 	<Script file='threatbar.lua'/>
 	<Script file='microbar.lua'/>
+	<Script file='reminder.lua'/>
 </Ui>

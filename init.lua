@@ -69,46 +69,16 @@ function OUI:AutoGreedLoot()
 	end
 end
 
-
-local hidestatic
-function OUI:AutoAcceptInv(event, ...)
-	if E.db.odine.autoacceptinv ~= true then return end
-
-	arg1 = ...
-	local leader = arg1
-	local ingroup = false
-	
-	if event == "PARTY_INVITE_REQUEST" then
-		if MiniMapLFGFrame:IsShown() then return end -- Prevent losing que inside LFD if someone invites you to group
-		if GetNumPartyMembers() > 0 or GetNumRaidMembers() > 0 then return end
-		hidestatic = true
-	
-		-- Update Guild and Friendlist
-		if GetNumFriends() > 0 then ShowFriends() end
-		if IsInGuild() then GuildRoster() end
-		
-		for friendIndex = 1, GetNumFriends() do
-			local friendName = GetFriendInfo(friendIndex)
-			if friendName == leader then
-				AcceptGroup()
-				ingroup = true
-				break
-			end
+-- buy max number value with alt
+local savedMerchantItemButton_OnModifiedClick = MerchantItemButton_OnModifiedClick
+function MerchantItemButton_OnModifiedClick(self, ...)
+	if ( IsAltKeyDown() ) then
+		local maxStack = select(8, GetItemInfo(GetMerchantItemLink(self:GetID())))
+		if ( maxStack and maxStack > 1 ) then
+			BuyMerchantItem(self:GetID(), GetMerchantItemMaxStack(self:GetID()))
 		end
-		
-		if not ingroup then
-			for guildIndex = 1, GetNumGuildMembers(true) do
-				local guildMemberName = GetGuildRosterInfo(guildIndex)
-				if guildMemberName == leader then
-					AcceptGroup()
-					break
-				end
-			end
-		end
-	elseif event == "PARTY_MEMBERS_CHANGED" and hidestatic == true then
-		StaticPopup_Hide("PARTY_INVITE")
-		hidestatic = false
 	end
+	savedMerchantItemButton_OnModifiedClick(self, ...)
 end
 
 
@@ -118,17 +88,14 @@ function OUI:Initialize()
 
 	self:SetupExtraMedia()
 	
-	if E.db.odine.installed == nil or (E.db.odine.installed and type(tonumber(E.db.odine.installed)) == 'number' and tonumber(E.db.odine.installed) <= 0.8) then
+	--[[if E.db.odine.installed == nil or (E.db.odine.installed and type(tonumber(E.db.odine.installed)) == 'number' and tonumber(E.db.odine.installed) <= 0.8) then
 		StaticPopup_Show("OUI_INSTALL")
-	end
+	end]]
 
 	self:RegisterEvent('CHAT_MSG_BN_WHISPER', 'MonitorWhispers')
 	self:RegisterEvent('CHAT_MSG_WHISPER', 'MonitorWhispers')
 	self:RegisterEvent('PLAYER_DEAD', 'AutoRelease')
 	self:RegisterEvent('START_LOOT_ROLL', 'AutoGreedLoot')
-	
-	self:RegisterEvent('PARTY_INVITE_REQUEST', 'AutoAcceptInv')
-	self:RegisterEvent('PARTY_MEMBERS_CHANGED', 'AutoAcceptInv')
 end
 
 
