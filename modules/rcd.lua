@@ -18,6 +18,8 @@ spell_list = {
 	[62618] = 180, -- Power Word: Barrier
 	[98008] = 180, -- Spirit Link Totem
 	[740] = 480, -- Tranquility
+	[16190] = 180, -- Mana Tide
+	[64843] = 480, -- Divine Hymn
 }
 
 local show = { }

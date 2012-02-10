@@ -67,12 +67,6 @@ E.Options.args.odine = {
 							desc = L["Automatically release body when dead inside a bg"],
 							disabled = function() return E.myclass == "SHAMAN" end,
 						},
-						autoacceptinv = {
-							type = "toggle",
-							order = 2,
-							name = L["Auto Accept Invite"],
-							desc = L["Automatically accept invite when invited by a friend/guildie"],							
-						},
 						autogreed = {
 							type = "toggle",
 							order = 3,

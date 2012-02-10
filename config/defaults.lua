@@ -7,6 +7,7 @@ DF["odine"] = {
 	["pvpautorelease"] = false,
 	["autoacceptinv"] = false,
 	["autogreed"] = false,
+	["extrapanel"] = true,
 	["reminder"] = { },
 	["chat"] = {
 		['bubbles'] = true,

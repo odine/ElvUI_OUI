@@ -38,7 +38,7 @@ E.Options.args.datatexts.args.dtFontSize = {
 	desc = L["Set the font size for Datatexts."],
 	type = "range",
 	min = 6, max = 25, step = 1,
-	set = function(info, value) E.db.odine.dtFS = value; OUI:SetupExtraMedia(); end,
+	set = function(info, value) E.db.odine.dtFS = value; DT:UpdateDTFont(); OUI:SetupExtraMedia(); end,
 	get = function(info) return E.db.odine.dtFS end,
 }
 
@@ -48,6 +48,6 @@ E.Options.args.datatexts.args.dtFont = {
 	name = L["Datatext Font"],
 	desc = L["The font that the datatexts will use."],
 	values = AceGUIWidgetLSMlists.font,	
-	set = function(info, value) E.db.odine.dtFont = value; OUI:SetupExtraMedia(); end,
+	set = function(info, value) E.db.odine.dtFont = value; DT:UpdateDTFont(); OUI:SetupExtraMedia(); end,
 	get = function(info) return E.db.odine.dtFont end,
 }
